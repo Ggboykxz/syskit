@@ -74,5 +74,5 @@ echo ""
 
 # Enregistrement de l'action dans le fichier log
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
-echo "[$DATE] Inventaire systeme effectue - OS: $OS - IP: $IP" >> "$LOG_FILE"
-
+NOYAU=$(uname -r)
+echo "[$DATE] Inventaire effectue - OS: $OS - Noyau: $NOYAU - IP: $IP" >> "$LOG_FILE"
