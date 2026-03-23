@@ -23,8 +23,11 @@ echo ""
 # Récupérer le nom du dossier
 NOM_DOSSIER=$(basename "$DOSSIER_SOURCE")
 
-# Nom de l'archive
-NOM_ARCHIVE="${NOM_DOSSIER}.tar"
+# Récupérer la date du jour
+DATE=$(date '+%Y-%m-%d')
+
+# Nom de l'archive avec la date
+NOM_ARCHIVE="${NOM_DOSSIER}_${DATE}.tar"
 
 # Chemin complet
 ARCHIVE_COMPLETE="$BACKUP_DIR/$NOM_ARCHIVE"
