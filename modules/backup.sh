@@ -8,9 +8,11 @@
 # Dossier de sauvegarde
 BACKUP_DIR="$(dirname "$0")/../backup"
 
-# Créer le dossier s'il n'existe pas
-mkdir -p "$BACKUP_DIR"
-
+# Créer le dossier backup/ s'il n'existe pas
+if [ ! -d "$BACKUP_DIR" ]; then
+    mkdir -p "$BACKUP_DIR"
+    echo "  Dossier backup/ cree automatiquement."
+fi
 # Récupérer le dossier source passé en argument
 DOSSIER_SOURCE=$1
 
@@ -51,5 +53,19 @@ echo ""
 # Création de l'archive
 tar -cf "$ARCHIVE_COMPLETE" -C "$(dirname "$DOSSIER_SOURCE")" "$NOM_DOSSIER" 2>/dev/null
 
-echo "  Sauvegarde terminee : $NOM_ARCHIVE"
-echo ""
+# Vérifier si la création a réussi
+if [ $? -eq 0 ]; then
+    TAILLE=$(du -sh "$ARCHIVE_COMPLETE" 2>/dev/null | cut -f1)
+    echo ""
+    echo "================================================"
+    echo "  Sauvegarde reussie !"
+    echo "  Archive : $NOM_ARCHIVE"
+    echo "  Taille  : $TAILLE"
+    echo "================================================"
+    echo ""
+else
+    echo ""
+    echo "[ERREUR] La sauvegarde a echoue."
+    echo ""
+    exit 1
+fi
