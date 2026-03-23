@@ -7,6 +7,11 @@
 
 # Dossier de sauvegarde
 BACKUP_DIR="$(dirname "$0")/../backup"
+LOG_DIR="$(dirname "$0")/../logs"
+LOG_FILE="$LOG_DIR/backup.log"
+
+# Créer le dossier logs s'il n'existe pas
+mkdir -p "$LOG_DIR"
 
 # Créer le dossier backup/ s'il n'existe pas
 if [ ! -d "$BACKUP_DIR" ]; then
@@ -62,10 +67,16 @@ if [ $? -eq 0 ]; then
     echo "  Archive : $NOM_ARCHIVE"
     echo "  Taille  : $TAILLE"
     echo "================================================"
+    # Enregistrement dans le log
+    DATE_LOG=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$DATE_LOG] Backup OK - Source: $DOSSIER_SOURCE - Archive: $NOM_ARCHIVE - Taille: $TAILLE" >> "$LOG_FILE"
     echo ""
 else
     echo ""
     echo "[ERREUR] La sauvegarde a echoue."
+    # Enregistrement de l'erreur dans le log
+    DATE_LOG=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$DATE_LOG] Backup ECHEC - Source: $DOSSIER_SOURCE" >> "$LOG_FILE"
     echo ""
     exit 1
 fi
