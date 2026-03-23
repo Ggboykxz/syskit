@@ -32,6 +32,18 @@ NOM_ARCHIVE="${NOM_DOSSIER}_${DATE}.tar"
 # Chemin complet
 ARCHIVE_COMPLETE="$BACKUP_DIR/$NOM_ARCHIVE"
 
+# Vérifier que le dossier source existe
+if [ ! -d "$DOSSIER_SOURCE" ]; then
+    echo "[ERREUR] Le dossier '$DOSSIER_SOURCE' n'existe pas."
+    echo "Veuillez verifier le chemin et reessayer."
+    exit 1
+    # Vérifier que le dossier source existe
+    # if [ ! -d "$DOSSIER_SOURCE" ]; then
+    #     echo "[ERREUR] Le dossier '$DOSSIER_SOURCE' n'existe pas."
+    #         echo "Veuillez verifier le chemin et reessayer."
+    #             exit 1
+    #             fi
+fi
 echo "  Dossier source  : $DOSSIER_SOURCE"
 echo "  Fichier archive : $NOM_ARCHIVE"
 echo ""
