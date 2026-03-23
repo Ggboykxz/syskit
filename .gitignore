@@ -1,0 +1,9 @@
+logs/syskit.log
+logs/cleanup_historique.txt
+backup/*.tar
+backup/historique_backups.txt
+reports/report.txt
+!logs/.gitkeep
+!backup/.gitkeep
+!reports/.gitkeep
+!docs/.gitkeep
