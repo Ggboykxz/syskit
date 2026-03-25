@@ -7,3 +7,21 @@ reports/report.txt
 !backup/.gitkeep
 !reports/.gitkeep
 !docs/.gitkeep
+```
+# Fichiers temporaires
+*.tmp
+*.swp
+*.swo
+
+# Fichiers de sauvegarde générés
+backup/*.tar
+
+# Rapports générés
+reports/*.txt
+
+# Fichiers logs générés
+logs/*.log
+logs/derniere_suppression.txt
+
+# Dossiers système
+.DS_Store
