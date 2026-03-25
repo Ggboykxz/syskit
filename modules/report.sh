@@ -7,6 +7,8 @@
 
 # Dossiers
 REPORTS_DIR="$(dirname "$0")/../reports"
+BACKUP_DIR="$(dirname "$0")/../backup"
+LOG_DIR="$(dirname "$0")/../logs"
 RAPPORT_FILE="$REPORTS_DIR/report.txt"
 
 # Créer le dossier s'il n'existe pas
@@ -59,4 +61,38 @@ echo ""
 echo "================================================"
 echo "  Rapport genere : $RAPPORT_FILE"
 echo "================================================"
+# Section 2 : Sauvegardes
+echo "[ 2. SAUVEGARDES REALISEES ]"
+echo "----------------------------"
+
+NB_BACKUPS=0
+if [ -d "$BACKUP_DIR" ]; then
+    for archive in "$BACKUP_DIR"/*.tar; do
+        if [ -f "$archive" ]; then
+            NOM=$(basename "$archive")
+            TAILLE=$(du -sh "$archive" 2>/dev/null | cut -f1)
+            echo "  - $NOM  ($TAILLE)"
+            NB_BACKUPS=$((NB_BACKUPS + 1))
+        fi
+    done
+fi
+
+if [ $NB_BACKUPS -eq 0 ]; then
+    echo "  Aucune sauvegarde trouvee."
+fi
+echo "  Nombre total de sauvegardes : $NB_BACKUPS"
+echo ""
+
+# Section 3 : Fichiers supprimés
+echo "[ 3. FICHIERS SUPPRIMES (dernier cleanup) ]"
+echo "----------------------------"
+
+FICHIER_SUPP="$LOG_DIR/derniere_suppression.txt"
+if [ -f "$FICHIER_SUPP" ]; then
+    NB_SUPP=$(cat "$FICHIER_SUPP")
+    echo "  Fichiers supprimes lors du dernier cleanup : $NB_SUPP"
+else
+    echo "  Aucun cleanup effectue."
+fi
+echo ""
 echo ""

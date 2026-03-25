@@ -62,5 +62,7 @@ echo "  Nettoyage termine !"
 echo "  Fichiers .tmp supprimes : $NB_TMP"
 echo "  Fichiers .log supprimes : $NB_LOG"
 echo "  Total supprimes         : $NB_TOTAL"
+# Sauvegarder le nombre de fichiers supprimés pour le rapport
+echo "$NB_TOTAL" > "$(dirname "$0")/../logs/derniere_suppression.txt"
 echo "================================================"
 echo ""
